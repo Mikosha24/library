@@ -20,16 +20,20 @@ function addBookToLibrary(title, author, numOfPages, isRead){
     library.push(book);
 }
 
+
 function displayBooks(library){
     let lib2 = library;
     let libraryElem = document.querySelector("#lib");
 
+    libraryElem.replaceChildren();
+    
+
     for(let book of lib2){
 
         
-
         let bookElem = document.createElement("div");
         bookElem.setAttribute("class", "book");
+        
 
         let titleElem = document.createElement("h1");
         titleElem.setAttribute("class", "title");
@@ -60,10 +64,12 @@ function displayBooks(library){
         bookElem.appendChild(isReadElem);
         bookElem.appendChild(label);
 
+        
         libraryElem.appendChild(bookElem);
+
     }
 
-
+    
 }
 
 
@@ -104,8 +110,10 @@ addBookButton.addEventListener("click", ()=>{
 
     addBookToLibrary(bookTitle, author, bookPages, bookStatus);
     
-    displayBooks(library);
+    
+    
 
+    displayBooks(library);
     bookDialog.close();
     
 })
