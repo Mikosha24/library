@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div id="lib"></div>
+
+        <button class="new-book-button" id="open-book-dialog" type="button">
+            + New Book
+        </button>
+    </div>
+
+
+    <!-- Add Book modal -->
+    <dialog class="book-dialog" id="book-dialog" aria-labelledby="book-dialog-title">
+
+        <div class="dialog-header">
+            <h2 id="book-dialog-title">Add a new book</h2>
+
+            <button class="close-dialog" id="close-book-dialog"
+            type="button" aria-label="Close dialog">
+            &times;
+            </button>
+        </div>
+
+        <form class="book-form" id="book-form">
+
+            <div class="form-field">
+            <label for="book-title">Book title</label>
+            <input
+                type="text"
+                id="book-title"
+                name="title"
+                placeholder="Enter title"
+                required
+            >
+            </div>
+
+            <div class="form-field">
+            <label for="book-author">Author</label>
+            <input
+                type="text"
+                id="book-author"
+                name="author"
+                placeholder="Enter author"
+                required
+            >
+            </div>
+
+            <div class="form-row">
+            <div class="form-field">
+                <label for="book-pages">Pages</label>
+                <input
+                type="number"
+                id="book-pages"
+                name="pages"
+                placeholder="e.g. 310"
+                min="1"
+                step="1"
+                required
+                >
+            </div>
+
+            <div class="form-field">
+                <label for="book-status">Reading status</label>
+                <select id="book-status" name="status" required>
+                <option value="not-read" selected>Not read</option>
+                <option value="reading">Currently reading</option>
+                <option value="read">Read</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="form-actions">
+            <button class="add-book-button" type="button">
+                Add Book
+            </button>
+
+            <button class="cancel-button" id="cancel-book-dialog"
+                type="button">
+                Cancel
+            </button>
+            </div>
+
+        </form>
+        </dialog>
+</bo    dy>
+</ht    ml> 
