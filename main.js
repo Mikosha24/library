@@ -14,6 +14,10 @@ function Book(title, author, numOfPages, isRead){
   }
 }
 
+Book.prototype.toggleReadStatus = function () {
+    this.isRead = !this.isRead;
+};
+
 function addBookToLibrary(title, author, numOfPages, isRead){
 
     let book = new Book(title, author, numOfPages, isRead);
@@ -33,7 +37,7 @@ function displayBooks(library){
         
         let bookElem = document.createElement("div");
         bookElem.setAttribute("class", "book");
-        
+        bookElem.setAttribute("data-index-number", `${book.id}`);
 
         let titleElem = document.createElement("h1");
         titleElem.setAttribute("class", "title");
@@ -52,19 +56,47 @@ function displayBooks(library){
 
         let label = document.createElement("label");
         label.textContent = "Read?";
+        
+        let removeBtn = document.createElement("button"); // Removes book element
+        removeBtn.setAttribute("id", "removeBtn");
+
+        removeBtn.addEventListener("click", ()=>{
+
+            removeBtn.parentElement.remove();
+            let bookId = removeBtn.parentElement.dataset.indexNumber;
+
+            const index = library.findIndex(book => book.id === bookId);
+
+            if(index != -1){
+                library.splice(index, 1);
+            }
+            displayBooks(library);
+
+        });
+
+        let readButton = document.createElement("button");
+        readButton.textContent = book.isRead ? "Mark as unread" : "Mark as read";
+        readButton.type = "button";
+
+        readButton.addEventListener("click", () => {
+            book.toggleReadStatus();
+            displayBooks(library);
+        });
+        
 
         titleElem.innerHTML = book.title;
         authorElem.innerHTML = book.author;
         numOfPagesElem.innerHTML = "Number of pages: " + book.numOfPages;
-        
+        removeBtn.innerHTML = "Remove";
         
         bookElem.appendChild(titleElem);
         bookElem.appendChild(authorElem);
         bookElem.appendChild(numOfPagesElem);
         bookElem.appendChild(isReadElem);
         bookElem.appendChild(label);
+        bookElem.appendChild(removeBtn);
+        bookElem.appendChild(readButton);
 
-        
         libraryElem.appendChild(bookElem);
 
     }
@@ -117,4 +149,6 @@ addBookButton.addEventListener("click", ()=>{
     bookDialog.close();
     
 })
+
+// 5 i 6 je ostao
 

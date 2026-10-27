@@ -1,69 +1,290 @@
-.wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+
+/* =========================
+   Base styles
+========================= */
+
+* {
+  box-sizing: border-box;
 }
 
-#lib{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    background-color: rgb(110, 63, 63);
-    border-radius: 8px;
+:root {
+  font-family: Arial, sans-serif;
+  color: #1f2937;
+  background-color: #f5f7fb;
 }
 
-.book{
-    color: aliceblue;
-    border: 1px solid rgb(243, 159, 63);
-    padding: 10px;
-}
-
-input[type="checkbox"]{
-    color: aliceblue;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f5f7fb;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 
+/* =========================
+   Main layout
+========================= */
 
-/* Open dialog button */
+.wrapper {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+
+/* =========================
+   Library grid
+========================= */
+
+#lib {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  align-items: stretch;
+  gap: 1rem;
+
+  background-color: transparent;
+  border-radius: 0;
+}
+
+
+/* =========================
+   Individual book cards
+========================= */
+
+.book {
+  min-width: 0;
+  padding: 1.25rem;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-content: start;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+
+  background-color: #ffffff;
+  color: #1f2937;
+
+  border: 1px solid #dce3ed;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 5px rgb(15 23 42 / 4%);
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.book:hover {
+  border-color: #c5d1e0;
+  box-shadow: 0 5px 14px rgb(15 23 42 / 7%);
+  transform: translateY(-2px);
+}
+
+
+/* Book title */
+
+.book .title {
+  grid-column: 1 / -1;
+
+  margin: 0;
+  overflow-wrap: anywhere;
+
+  color: #111827;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+
+/* Author */
+
+.book .author {
+  grid-column: 1 / -1;
+
+  margin: 0;
+  overflow-wrap: anywhere;
+
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+
+/* Page count */
+
+.book .numOfPages {
+  grid-column: 1 / -1;
+
+  margin: 0 0 0.4rem;
+
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+
+/* Read checkbox */
+
+.book input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+
+  justify-self: start;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+
+/* Read checkbox label */
+
+.book label {
+  justify-self: start;
+
+  color: #475569;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+
+/* =========================
+   Book action buttons
+========================= */
+
+.book button {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 0.5rem 0.6rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+
+  background-color: #2563eb;
+  color: #ffffff;
+
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  overflow-wrap: anywhere;
+
+  cursor: pointer;
+
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.book button:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+/* Red outline for Remove/Delete buttons.
+   Works when their class or ID contains "remove" or "delete". */
+
+.book button[class*="remove" i],
+.book button[class*="delete" i],
+.book button[id*="remove" i],
+.book button[id*="delete" i] {
+  background-color: #ffffff;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.book button[class*="remove" i]:hover,
+.book button[class*="delete" i]:hover,
+.book button[id*="remove" i]:hover,
+.book button[id*="delete" i]:hover {
+  background-color: #fef2f2;
+  border-color: #f87171;
+}
+
+.book button:focus-visible,
+.new-book-button:focus-visible {
+  outline: 3px solid rgb(37 99 235 / 30%);
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   New Book button
+========================= */
+
 .new-book-button {
-  padding: 0.75rem 1.25rem;
+  align-self: center;
+
+  padding: 0.8rem 1.4rem;
   border: none;
   border-radius: 8px;
+
   background-color: #2563eb;
-  color: white;
+  color: #ffffff;
+
+  font: inherit;
   font-size: 1rem;
   font-weight: 600;
+
   cursor: pointer;
+  box-shadow: 0 2px 4px rgb(37 99 235 / 15%);
+
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
 }
 
 .new-book-button:hover {
   background-color: #1d4ed8;
+  transform: translateY(-1px);
 }
 
-/* Modal window */
+
+/* =========================
+   Modal window
+========================= */
+
 .book-dialog {
   width: min(420px, calc(100% - 2rem));
   max-width: 100%;
+  max-height: calc(100% - 2rem);
+  overflow-y: auto;
+
   padding: 1.5rem;
   border: none;
   border-radius: 14px;
-  background-color: white;
+
+  background-color: #ffffff;
   color: #1f2937;
-  box-shadow: 0 20px 50px rgb(0 0 0 / 25%);
+
+  box-shadow: 0 20px 50px rgb(15 23 42 / 25%);
 }
 
 .book-dialog::backdrop {
   background-color: rgb(15 23 42 / 65%);
 }
 
-/* Dialog heading and close button */
+
+/* Modal heading and close button */
+
 .dialog-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+
   margin-bottom: 1.5rem;
 }
 
@@ -75,10 +296,13 @@ input[type="checkbox"]{
 .close-dialog {
   padding: 0;
   border: none;
+
   background: none;
   color: #6b7280;
+
   font-size: 1.8rem;
   line-height: 1;
+
   cursor: pointer;
 }
 
@@ -86,7 +310,11 @@ input[type="checkbox"]{
   color: #111827;
 }
 
-/* Form layout */
+
+/* =========================
+   Add Book form
+========================= */
+
 .book-form {
   display: grid;
   gap: 1.1rem;
@@ -99,6 +327,7 @@ input[type="checkbox"]{
 }
 
 .form-field label {
+  color: #374151;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -108,10 +337,13 @@ input[type="checkbox"]{
   width: 100%;
   min-width: 0;
   padding: 0.7rem 0.75rem;
+
   border: 1px solid #d1d5db;
   border-radius: 7px;
-  background-color: white;
+
+  background-color: #ffffff;
   color: #1f2937;
+
   font: inherit;
   font-size: 0.95rem;
 }
@@ -126,14 +358,18 @@ input[type="checkbox"]{
   outline: 2px solid rgb(37 99 235 / 15%);
 }
 
+
 /* Pages and status side by side */
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   gap: 0.9rem;
 }
 
-/* Form buttons */
+
+/* Form action buttons */
+
 .form-actions {
   display: grid;
   gap: 0.75rem;
@@ -144,16 +380,19 @@ input[type="checkbox"]{
 .cancel-button {
   min-height: 44px;
   padding: 0.7rem 1rem;
+
   border-radius: 7px;
+
   font: inherit;
   font-weight: 600;
+
   cursor: pointer;
 }
 
 .add-book-button {
   border: none;
   background-color: #2563eb;
-  color: white;
+  color: #ffffff;
 }
 
 .add-book-button:hover {
@@ -162,7 +401,7 @@ input[type="checkbox"]{
 
 .cancel-button {
   border: 1px solid #d1d5db;
-  background-color: white;
+  background-color: #ffffff;
   color: #374151;
 }
 
@@ -173,4 +412,19 @@ input[type="checkbox"]{
 .book-dialog button:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 3px;
+}
+
+
+/* =========================
+   Reduced motion preference
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
