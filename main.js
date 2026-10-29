@@ -1,17 +1,20 @@
 let library = []; // contains the book objects
 
-function Book(title, author, numOfPages, isRead){
-    
-  this.title = title;
-  this.author = author;
-  this.numOfPages = numOfPages;
-  this.isRead = isRead;
-  this.id = crypto.randomUUID();
+class Book {
 
-  this.info = function(){
-    console.log(`Title: ${this.title}, Author: ${this.author}, 
-    ${this.title} is ${this.numOfPages} pages long.`);
-  }
+    id = crypto.randomUUID();
+
+    constructor(title, author, numOfPages, isRead){
+        this.title = title;
+        this.author = author;
+        this.numOfPages = numOfPages;
+        this.isRead = isRead;
+    }
+
+    bookInfo(){
+        console.log(`Title: ${this.title}, Author: ${this.author}, 
+        ${this.title} is ${this.numOfPages} pages long.`);
+    }
 }
 
 Book.prototype.toggleReadStatus = function () {
@@ -150,5 +153,5 @@ addBookButton.addEventListener("click", ()=>{
     
 })
 
-// 5 i 6 je ostao
+
 
